@@ -7,7 +7,7 @@
 
         <variable
                 name="viewModel"
-                type="com.example.android.cityvisitor.search.GdgListViewModel" />
+                type="com.example.android.cityvisitor.search.MonumentListViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -34,7 +34,7 @@
         </HorizontalScrollView>
 
         <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/gdg_chapter_list"
+                android:id="@+id/gdg_monument_list"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginTop="8dp"
@@ -46,7 +46,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 tools:listitem="@layout/list_item"
-                app:listData="@{viewModel.gdgList}"
+                app:listData="@{viewModel.monumentList}"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
 
@@ -60,7 +60,7 @@
                 android:text="@string/waiting_for_location_and_network"
                 android:gravity="center"
                 android:textStyle="bold"
-                app:showOnlyWhenEmpty="@{viewModel.gdgList}"
+                app:showOnlyWhenEmpty="@{viewModel.monumentList}"
                 tools:visibility="gone"
         />
 

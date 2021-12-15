@@ -2,29 +2,29 @@ package com.example.android.cityvisitor.search
 
 import android.location.Location
 import androidx.lifecycle.*
-import com.example.android.cityvisitor.network.GdgApi
-import com.example.android.cityvisitor.network.GdgChapter
+import com.example.android.cityvisitor.network.CityVisitorApi
+import com.example.android.cityvisitor.network.Monuments
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.io.IOException
 
 
-class GdgListViewModel: ViewModel() {
+class MonumentListViewModel: ViewModel() {
 
-    private val repository = GdgChapterRepository(GdgApi.retrofitService)
+    private val repository = MonumentsRepository(CityVisitorApi.RETROFIT_SERVICE)
 
     private var filter = FilterHolder()
 
     private var currentJob: Job? = null
 
-    private val _gdgList = MutableLiveData<List<GdgChapter>>()
+    private val _monumentList = MutableLiveData<List<Monuments>>()
     private val _regionList = MutableLiveData<List<String>>()
     private val _showNeedLocation = MutableLiveData<Boolean>()
 
     // The external LiveData interface to the property is immutable, so only this class can modify
-    val gdgList: LiveData< List<GdgChapter>>
-        get() = _gdgList
+    val monumentList: LiveData< List<Monuments>>
+        get() = _monumentList
 
     val regionList: LiveData<List<String>>
         get() = _regionList
@@ -47,7 +47,7 @@ class GdgListViewModel: ViewModel() {
         currentJob = viewModelScope.launch {
             try {
                 // this will run on a thread managed by Retrofit
-                _gdgList.value = repository.getChaptersForFilter(filter.currentValue)
+                _monumentList.value = repository.getMonumentsForFilter(filter.currentValue)
                 repository.getFilters().let {
                     // only update the filters list if it's changed since the last time
                     if (it != _regionList.value) {
@@ -55,7 +55,7 @@ class GdgListViewModel: ViewModel() {
                     }
                 }
             } catch (e: IOException) {
-                _gdgList.value = listOf()
+                _monumentList.value = listOf()
             }
         }
     }

@@ -5,25 +5,25 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.android.cityvisitor.network.GdgChapter
-import com.example.android.cityvisitor.search.GdgListAdapter.GdgListViewHolder
+import com.example.android.cityvisitor.search.MonumentListAdapter.MonumentListViewHolder
 import com.example.android.cityvisitor.databinding.ListItemBinding
+import com.example.android.cityvisitor.network.Monuments
 
-class GdgListAdapter(val clickListener: GdgClickListener): ListAdapter<GdgChapter, GdgListViewHolder>(DiffCallback){
-    companion object DiffCallback : DiffUtil.ItemCallback<GdgChapter>() {
-        override fun areItemsTheSame(oldItem: GdgChapter, newItem: GdgChapter): Boolean {
+class MonumentListAdapter(val clickListener: MonumentClickListener): ListAdapter<Monuments, MonumentListViewHolder>(DiffCallback){
+    companion object DiffCallback : DiffUtil.ItemCallback<Monuments>() {
+        override fun areItemsTheSame(oldItem: Monuments, newItem: Monuments): Boolean {
             return oldItem === newItem
         }
 
-        override fun areContentsTheSame(oldItem: GdgChapter, newItem: GdgChapter): Boolean {
+        override fun areContentsTheSame(oldItem: Monuments, newItem: Monuments): Boolean {
             return oldItem == newItem
         }
     }
 
-    class GdgListViewHolder(private var binding: ListItemBinding):
+    class MonumentListViewHolder(private var binding: ListItemBinding):
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(listener: GdgClickListener, gdgChapter: GdgChapter) {
-            binding.chapter = gdgChapter
+        fun bind(listener: MonumentClickListener, monument: Monuments) {
+            binding.monument = monument
             binding.clickListener = listener
             // This is important, because it forces the data binding to execute immediately,
             // which allows the RecyclerView to make the correct view size measurements
@@ -31,10 +31,10 @@ class GdgListAdapter(val clickListener: GdgClickListener): ListAdapter<GdgChapte
         }
 
         companion object {
-            fun from(parent: ViewGroup): GdgListViewHolder {
+            fun from(parent: ViewGroup): MonumentListViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = ListItemBinding.inflate(layoutInflater, parent, false)
-                return GdgListViewHolder(binding)
+                return MonumentListViewHolder(binding)
             }
         }
     }
@@ -45,8 +45,8 @@ class GdgListAdapter(val clickListener: GdgClickListener): ListAdapter<GdgChapte
      * A ViewHolder holds a view for the [RecyclerView] as well as providing additional information
      * to the RecyclerView such as where on the screen it was last drawn during scrolling.
      */
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GdgListViewHolder {
-        return GdgListViewHolder.from(parent)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MonumentListViewHolder {
+        return MonumentListViewHolder.from(parent)
 
     }
 
@@ -56,11 +56,11 @@ class GdgListAdapter(val clickListener: GdgClickListener): ListAdapter<GdgChapte
      * The ViewHolder passed may be recycled, so make sure that this sets any properties that
      * may have been set previously.
      */
-    override fun onBindViewHolder(holder: GdgListViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MonumentListViewHolder, position: Int) {
         holder.bind(clickListener, getItem(position))
     }
 }
 
-class GdgClickListener(val clickListener: (chapter: GdgChapter) -> Unit) {
-    fun onClick(chapter: GdgChapter) = clickListener(chapter)
+class MonumentClickListener(val clickListener: (monument: Monuments) -> Unit) {
+    fun onClick(monument: Monuments) = clickListener(monument)
 }

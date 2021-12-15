@@ -11,7 +11,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.android.cityvisitor.databinding.FragmentGdgListBinding
+import com.example.android.cityvisitor.databinding.FragmentMonumentListBinding
 import com.google.android.gms.location.*
 import com.google.android.material.chip.Chip
 import com.google.android.material.snackbar.Snackbar
@@ -21,16 +21,16 @@ private const val LOCATION_PERMISSION_REQUEST = 1
 
 private const val LOCATION_PERMISSION = "android.permission.ACCESS_FINE_LOCATION"
 
-class GdgListFragment : Fragment() {
+class MonumentListFragment : Fragment() {
 
 
-    private val viewModel: GdgListViewModel by lazy {
-        ViewModelProvider(this).get(GdgListViewModel::class.java)
+    private val viewModel: MonumentListViewModel by lazy {
+        ViewModelProvider(this).get(MonumentListViewModel::class.java)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val binding = FragmentGdgListBinding.inflate(inflater)
+        val binding = FragmentMonumentListBinding.inflate(inflater)
 
         // Allows Data Binding to Observe LiveData with the lifecycle of this Fragment
         binding.setLifecycleOwner(this)
@@ -38,13 +38,13 @@ class GdgListFragment : Fragment() {
         // Giving the binding access to the OverviewViewModel
         binding.viewModel = viewModel
 
-        val adapter = GdgListAdapter(GdgClickListener { chapter ->
-            val destination = Uri.parse(chapter.website)
+        val adapter = MonumentListAdapter(MonumentClickListener { monument ->
+            val destination = Uri.parse(monument.website)
             startActivity(Intent(Intent.ACTION_VIEW, destination))
         })
 
         // Sets the adapter of the RecyclerView
-        binding.gdgChapterList.adapter = adapter
+        binding.gdgMonumentList.adapter = adapter
 
         viewModel.showNeedLocation.observe(viewLifecycleOwner, object: Observer<Boolean> {
             override fun onChanged(show: Boolean?) {
@@ -52,7 +52,7 @@ class GdgListFragment : Fragment() {
                 if (show == true) {
                     Snackbar.make(
                         binding.root,
-                        "No location. Enable location in settings (hint: test with Maps) then check app permissions!",
+                        "Brak lokalizacji. Uruchom lokalizacje lub sprawdź uprawnienia (sprawdź na google maps)",
                         Snackbar.LENGTH_LONG
                     ).show()
                 }

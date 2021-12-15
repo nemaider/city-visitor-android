@@ -1,23 +1,20 @@
 package com.example.android.cityvisitor.search
 
 import android.location.Location
-import com.example.android.cityvisitor.network.GdgApiService
-import com.example.android.cityvisitor.network.GdgChapter
-import com.example.android.cityvisitor.network.GdgResponse
-import com.example.android.cityvisitor.network.LatLong
+import com.example.android.cityvisitor.network.*
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.withContext
 
-class GdgChapterRepository(gdgApiService: GdgApiService) {
+class MonumentsRepository(cityVisitorApiService: CityVisitorApiService) {
 
     /**
      * A single network request, the results won't change. For this lesson we did not add an offline cache for simplicity
      * and the result will be cached in memory.
      */
-    private val monuments = gdgApiService.getChapters()
+    private val monuments = cityVisitorApiService.getMonuments()
 
     /**
      * An in-progress (or potentially completed) sort, this may be null or cancelled at any time.
@@ -40,11 +37,11 @@ class GdgChapterRepository(gdgApiService: GdgApiService) {
      * This works by first waiting for any previously in-progress sorts, and if a sort has not yet started
      * it will start a new sort (which may happen if location is disabled on the device)
      */
-    suspend fun getChaptersForFilter(filter: String?): List<GdgChapter> {
+    suspend fun getMonumentsForFilter(filter: String?): List<Monuments> {
         val data = sortedData()
         return when(filter) {
-            null -> data.chapters
-            else -> data.chaptersByRegion.getOrElse(filter) { emptyList() }
+            null -> data.monuments
+            else -> data.monumentsByRegion.getOrElse(filter) { emptyList() }
         }
     }
 
@@ -132,9 +129,9 @@ class GdgChapterRepository(gdgApiService: GdgApiService) {
      * only be called by [doSortData].
      */
     private class SortedData private constructor(
-        val chapters: List<GdgChapter>,
+        val monuments: List<Monuments>,
         val filters: List<String>,
-        val chaptersByRegion: Map<String, List<GdgChapter>>
+        val monumentsByRegion: Map<String, List<Monuments>>
     ) {
 
         companion object {
@@ -144,17 +141,17 @@ class GdgChapterRepository(gdgApiService: GdgApiService) {
              * @param response the response to sort
              * @param location the location to sort by, if null the data will not be sorted.
              */
-            suspend fun from(response: GdgResponse, location: Location?): SortedData {
+            suspend fun from(response: MonumentResponse, location: Location?): SortedData {
                 return withContext(Dispatchers.Default) {
                     // this sorting is too expensive to do on the main thread, so do thread confinement here.
-                    val chapters: List<GdgChapter> = response.chapters.sortByDistanceFrom(location)
+                    val monuments: List<Monuments> = response.monuments.sortByDistanceFrom(location)
                     // use distinctBy which will maintain the input order - this will have the effect of making
                     // a filter list sorted by the distance from the current location
-                    val filters: List<String> = chapters.map { it.category } .distinctBy { it }
+                    val filters: List<String> = monuments.map { it.category } .distinctBy { it }
                     // group the chapters by region so that filter queries don't require any work
-                    val chaptersByRegion: Map<String, List<GdgChapter>> = chapters.groupBy { it.category }
+                    val monumentsByRegion: Map<String, List<Monuments>> = monuments.groupBy { it.category }
                     // return the sorted result
-                    SortedData(chapters, filters, chaptersByRegion)
+                    SortedData(monuments, filters, monumentsByRegion)
                 }
 
             }
@@ -165,7 +162,7 @@ class GdgChapterRepository(gdgApiService: GdgApiService) {
              *
              * @param currentLocation returned list will be sorted by the distance, or unsorted if null
              */
-            private fun List<GdgChapter>.sortByDistanceFrom(currentLocation: Location?): List<GdgChapter> {
+            private fun List<Monuments>.sortByDistanceFrom(currentLocation: Location?): List<Monuments> {
                 currentLocation ?: return this
 
                 return sortedBy { distanceBetween(it.geo, currentLocation)}

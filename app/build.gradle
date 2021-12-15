@@ -27,7 +27,7 @@ android {
         dataBinding true
     }
     defaultConfig {
-        applicationId "com.example.android.gdgfinder"
+        applicationId "com.example.android.cityvisitor"
         minSdkVersion 19
         targetSdkVersion 30
         versionCode 1

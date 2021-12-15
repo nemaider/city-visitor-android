@@ -31,7 +31,7 @@ class HomeFragment : Fragment() {
             Observer<Boolean> { shouldNavigate ->
                 if (shouldNavigate == true) {
                     val navController = binding.root.findNavController()
-                    navController.navigate(R.id.action_homeFragment_to_gdgListFragment)
+                    navController.navigate(R.id.action_homeFragment_to_monumentListFragment)
                     viewModel.onNavigatedToSearch()
                 }
             })

@@ -3,15 +3,15 @@ package com.example.android.cityvisitor
 import android.view.View
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.android.cityvisitor.network.GdgChapter
-import com.example.android.cityvisitor.search.GdgListAdapter
+import com.example.android.cityvisitor.network.Monuments
+import com.example.android.cityvisitor.search.MonumentListAdapter
 
 /**
  * When there is no Mars property data (data is null), hide the [RecyclerView], otherwise show it.
  */
 @BindingAdapter("listData")
-fun bindRecyclerView(recyclerView: RecyclerView, data: List<GdgChapter>?) {
-    val adapter = recyclerView.adapter as GdgListAdapter
+fun bindRecyclerView(recyclerView: RecyclerView, data: List<Monuments>?) {
+    val adapter = recyclerView.adapter as MonumentListAdapter
     adapter.submitList(data) {
         // scroll the list to the top after the diffs are calculated and posted
         recyclerView.scrollToPosition(0)
@@ -19,7 +19,7 @@ fun bindRecyclerView(recyclerView: RecyclerView, data: List<GdgChapter>?) {
 }
 
 @BindingAdapter("showOnlyWhenEmpty")
-fun View.showOnlyWhenEmpty(data: List<GdgChapter>?) {
+fun View.showOnlyWhenEmpty(data: List<Monuments>?) {
     visibility = when {
         data == null || data.isEmpty() -> View.VISIBLE
         else -> View.GONE
