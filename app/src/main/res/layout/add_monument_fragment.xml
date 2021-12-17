@@ -8,14 +8,14 @@
 
         <variable
                 name="viewModel"
-                type="com.example.android.cityvisitor.add.AddGdgViewModel"/>
+                type="com.example.android.cityvisitor.add.AddMonumentViewModel"/>
     </data>
     <ScrollView android:layout_height="match_parent"
                 android:layout_width="match_parent">
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:context=".add.AddGdgFragment">
+                tools:context=".add.AddMonumentFragment">
 
             <TextView
                 android:id="@+id/textViewIntro"
@@ -52,6 +52,7 @@
                     android:layout_width="match_parent"
                     android:layout_marginTop="8dp"
                     android:hint="@string/monument_name_label"
+                    android:text="@={viewModel.name}"
                     app:layout_constraintTop_toBottomOf="@+id/imageView"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -67,7 +68,8 @@
                     android:layout_width="match_parent"
                     android:layout_marginTop="4dp"
                     android:hint="@string/description_label"
-                    app:layout_constraintTop_toBottomOf="@+id/EditTextInfo"
+                    android:text="@={viewModel.description}"
+                    app:layout_constraintTop_toBottomOf="@+id/EditTextCategory"
                     app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginStart="32dp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -81,6 +83,7 @@
                     android:layout_width="match_parent"
                     android:layout_marginTop="4dp"
                     android:hint="@string/category_label"
+                    android:text="@={viewModel.category}"
                     app:layout_constraintTop_toBottomOf="@+id/EditTextInfo"
                     app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginStart="32dp"
@@ -94,6 +97,7 @@
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
                     android:hint="@string/website_link_label"
+                    android:text="@={viewModel.url}"
                     app:layout_constraintTop_toBottomOf="@+id/EditTextCategory"
                     app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginStart="32dp"
@@ -109,6 +113,7 @@
                     android:layout_width="match_parent"
                     android:layout_marginTop="4dp"
                     android:hint="@string/rate_label"
+                    android:text="@={viewModel.rate}"
                     app:layout_constraintTop_toBottomOf="@+id/EditTextWebsite"
                     app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginStart="32dp"
@@ -154,6 +159,7 @@
                     android:hint="@string/enter_lat"
                     android:inputType="numberDecimal"
                     android:minHeight="48dp"
+                    android:text="@={viewModel.lat}"
                     app:layout_constraintBottom_toTopOf="@+id/button"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -177,6 +183,7 @@
                     android:hint="@string/enter_lng"
                     android:inputType="numberDecimal"
                     android:minHeight="48dp"
+                    android:text="@={viewModel.lng}"
                     app:layout_constraintBottom_toTopOf="@+id/button"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -194,7 +201,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/contentGroup"
                     android:layout_marginBottom="12dp"
                     android:layout_marginEnd="40dp"
-                    android:onClick="@{() -> viewModel.onSubmitApplication()}"/>
+                    android:onClick="@{() -> viewModel.addMonument()}"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </layout>

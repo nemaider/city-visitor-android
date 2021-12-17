@@ -11,10 +11,10 @@
     <fragment android:id="@+id/home" android:name="com.example.android.cityvisitor.home.HomeFragment"
               android:label="Home" tools:layout="@layout/home_fragment">
         <action android:id="@+id/action_homeFragment_to_monumentListFragment" app:destination="@id/monument_search"/>
-        <action android:id="@+id/action_homeFragment_to_addGdgFragment" app:destination="@id/gdg_apply"/>
+        <action android:id="@+id/action_homeFragment_to_addMonumentFragment" app:destination="@id/monument_apply"/>
     </fragment>
-    <fragment android:id="@+id/gdg_apply" android:name="com.example.android.cityvisitor.add.AddGdgFragment"
-              android:label="Apply" tools:layout="@layout/add_gdg_fragment"/>
+    <fragment android:id="@+id/monument_apply" android:name="com.example.android.cityvisitor.add.AddMonumentFragment"
+              android:label="Apply" tools:layout="@layout/add_monument_fragment"/>
 
     <!--<fragment-->
             <!--android:id="@+id/gdgDetailFragment"-->

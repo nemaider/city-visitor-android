@@ -1,6 +1,7 @@
 package com.example.android.cityvisitor.search
 
 import android.location.Location
+import android.util.Log
 import com.example.android.cityvisitor.network.*
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
@@ -10,11 +11,27 @@ import kotlinx.coroutines.withContext
 
 class MonumentsRepository(cityVisitorApiService: CityVisitorApiService) {
 
+
+    private val cityVisitorApi = cityVisitorApiService
+
     /**
      * A single network request, the results won't change. For this lesson we did not add an offline cache for simplicity
      * and the result will be cached in memory.
      */
-    private val monuments = cityVisitorApiService.getMonuments()
+    private val monuments = cityVisitorApi.getMonuments()
+
+    suspend fun addMonument(monuments: Monuments){
+
+        withContext(Dispatchers.IO) {
+            try {
+                CityVisitorApi.RETROFIT_SERVICE.addMonument(monuments)
+            } catch (e: Exception) {
+                Log.e("eloelo", e.message + "add monument")
+            }
+        }
+    }
+
+
 
     /**
      * An in-progress (or potentially completed) sort, this may be null or cancelled at any time.
@@ -173,9 +190,11 @@ class MonumentsRepository(cityVisitorApiService: CityVisitorApiService) {
              */
             private fun distanceBetween(start: LatLong, currentLocation: Location): Float {
                 val results = FloatArray(3)
-                Location.distanceBetween(start.lat, start.long, currentLocation.latitude, currentLocation.longitude, results)
+                Location.distanceBetween(start.lat, start.lng, currentLocation.latitude, currentLocation.longitude, results)
                 return results[0]
             }
         }
     }
+
+
 }

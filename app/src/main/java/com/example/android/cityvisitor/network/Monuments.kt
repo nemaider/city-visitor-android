@@ -2,10 +2,11 @@ package com.example.android.cityvisitor.network
 
 import android.os.Parcelable
 import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 import kotlinx.android.parcel.Parcelize
 
 
-
+@JsonClass(generateAdapter = true)
 @Parcelize
 data class Monuments(
     val name: String,
@@ -16,12 +17,14 @@ data class Monuments(
     val geo: LatLong
  ): Parcelable
 
+@JsonClass(generateAdapter = true)
 @Parcelize
 data class LatLong(
     val lat: Double,
     @Json(name = "lng")
-    val long: Double
+    val lng: Double
 ) : Parcelable
+
 
 @Parcelize
 data class MonumentResponse(

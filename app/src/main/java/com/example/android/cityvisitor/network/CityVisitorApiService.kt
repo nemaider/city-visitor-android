@@ -6,16 +6,29 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.coroutines.Deferred
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import retrofit2.http.GET
+import retrofit2.http.*
 
 
 //private const val BASE_URL = "https://android-kotlin-fun-mars-server.appspot.com/"
-private const val BASE_URL = "http://192.168.0.43:8080/api/v1/monuments/"
+private const val BASE_URL = "http://192.168.0.43:8080/api/v1/"
 interface CityVisitorApiService {
-    @GET("all-data")
+    @GET("monuments/all-data")
     fun getMonuments():
     // The Coroutine Call Adapter allows us to return a Deferred, a Job with a result
             Deferred<MonumentResponse>
+
+//    @GET()
+
+
+
+    @POST("monuments/add")
+//    @Headers( "Content-Type: application/json;charset=UTF-8")
+    suspend fun addMonument(@Body monument: Monuments)
+
+   /* @PATCH("tourists/add-to-favourite")
+    suspend fun addMonumentToFavourite(@Query("touristId") touristId: String,
+                               @Query("monumentId") monumentId: String)
+*/
 
 
 }

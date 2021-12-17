@@ -2,5 +2,5 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:title="@string/monument_search" android:id="@+id/monument_search" />
-    <item android:title="@string/gdg_apply" android:id="@+id/gdg_apply"/>
+    <item android:title="@string/monument_add" android:id="@+id/monument_apply"/>
 </menu>

@@ -9,18 +9,18 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 
 import com.example.android.cityvisitor.R
-import com.example.android.cityvisitor.databinding.AddGdgFragmentBinding
+import com.example.android.cityvisitor.databinding.AddMonumentFragmentBinding
 import com.google.android.material.snackbar.Snackbar
 
-class AddGdgFragment : Fragment() {
+class AddMonumentFragment : Fragment() {
 
-    private val viewModel: AddGdgViewModel by lazy {
-        ViewModelProvider(this).get(AddGdgViewModel::class.java)
+    private val viewModel: AddMonumentViewModel by lazy {
+        ViewModelProvider(this).get(AddMonumentViewModel::class.java)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val binding = AddGdgFragmentBinding.inflate(inflater)
+        val binding = AddMonumentFragmentBinding.inflate(inflater)
 
         // Allows Data Binding to Observe LiveData with the lifecycle of this Fragment
         binding.setLifecycleOwner(this)
