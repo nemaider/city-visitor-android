@@ -17,18 +17,17 @@ interface CityVisitorApiService {
     // The Coroutine Call Adapter allows us to return a Deferred, a Job with a result
             Deferred<MonumentResponse>
 
-//    @GET()
-
+    @GET("tourists/getAllFavouritesMonuments")
+    fun getFavouriteMonuments(@Query("touristId") touristId: String):
+            Deferred<MonumentResponse>
 
 
     @POST("monuments/add")
-//    @Headers( "Content-Type: application/json;charset=UTF-8")
     suspend fun addMonument(@Body monument: Monuments)
 
-   /* @PATCH("tourists/add-to-favourite")
+    @PATCH("tourists/add-to-favourite")
     suspend fun addMonumentToFavourite(@Query("touristId") touristId: String,
                                @Query("monumentId") monumentId: String)
-*/
 
 
 }

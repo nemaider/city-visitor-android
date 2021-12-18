@@ -36,6 +36,7 @@ class AddMonumentViewModel : ViewModel() {
             val monuments = monumentCreator.createMonument()
 
             repository.addMonument(monuments)
+            onSubmitApplication()
         }
     }
 

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -41,10 +42,23 @@ class MonumentListFragment : Fragment() {
         val adapter = MonumentListAdapter(MonumentClickListener { monument ->
             val destination = Uri.parse(monument.website)
             startActivity(Intent(Intent.ACTION_VIEW, destination))
+        }, FavouriteMonumentClickListener { monument ->
+            viewModel.addMonumentToFavourite(monument)
+            Snackbar.make(
+                binding.root,
+                "Dodano do ulubionych "+monument.name,
+                Snackbar.LENGTH_LONG
+            ).show()
         })
 
+
+
+
+
         // Sets the adapter of the RecyclerView
-        binding.gdgMonumentList.adapter = adapter
+        binding.monumentList.adapter = adapter
+
+
 
         viewModel.showNeedLocation.observe(viewLifecycleOwner, object: Observer<Boolean> {
             override fun onChanged(show: Boolean?) {

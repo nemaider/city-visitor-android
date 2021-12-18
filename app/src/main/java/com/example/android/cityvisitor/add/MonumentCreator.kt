@@ -15,6 +15,7 @@ class MonumentCreator {
 
     fun createMonument() : Monuments{
         return Monuments(
+            _id =  "",
             name = name,
             info = description,
             category = category,

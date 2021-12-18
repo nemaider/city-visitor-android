@@ -9,6 +9,7 @@ import kotlinx.android.parcel.Parcelize
 @JsonClass(generateAdapter = true)
 @Parcelize
 data class Monuments(
+    val _id: String,
     val name: String,
     val info: String,
     val category: String,

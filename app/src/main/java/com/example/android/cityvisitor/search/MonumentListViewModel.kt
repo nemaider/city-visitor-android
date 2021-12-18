@@ -1,6 +1,7 @@
 package com.example.android.cityvisitor.search
 
 import android.location.Location
+import android.util.Log
 import androidx.lifecycle.*
 import com.example.android.cityvisitor.network.CityVisitorApi
 import com.example.android.cityvisitor.network.Monuments
@@ -41,6 +42,18 @@ class MonumentListViewModel: ViewModel() {
             _showNeedLocation.value = !repository.isFullyInitialized
         }
     }
+
+//    var monument = MutableLiveData<Monuments>()
+//
+    fun addMonumentToFavourite(monument: Monuments){
+        viewModelScope.launch {
+            repository.addToFavourite(monument)
+        }
+    }
+
+
+
+
 
     private fun onQueryChanged() {
         currentJob?.cancel() // if a previous query is running cancel it before starting another

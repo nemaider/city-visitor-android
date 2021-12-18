@@ -18,6 +18,11 @@ class MonumentsRepository(cityVisitorApiService: CityVisitorApiService) {
      * A single network request, the results won't change. For this lesson we did not add an offline cache for simplicity
      * and the result will be cached in memory.
      */
+
+    private val tourist_id = "618bc30fae697254a946764f"
+//    private val favourite_monuments = cityVisitorApi.getFavouriteMonuments(tourist_id)
+
+
     private val monuments = cityVisitorApi.getMonuments()
 
     suspend fun addMonument(monuments: Monuments){
@@ -26,7 +31,20 @@ class MonumentsRepository(cityVisitorApiService: CityVisitorApiService) {
             try {
                 CityVisitorApi.RETROFIT_SERVICE.addMonument(monuments)
             } catch (e: Exception) {
-                Log.e("eloelo", e.message + "add monument")
+                Log.e("adding", e.message.toString())
+            }
+        }
+    }
+
+
+
+    suspend fun addToFavourite(monument: Monuments){
+        withContext(Dispatchers.IO){
+            try {
+                Log.e("patching", "kurwo dzialaj")
+                CityVisitorApi.RETROFIT_SERVICE.addMonumentToFavourite(tourist_id, monument._id)
+            } catch (e: Exception) {
+                Log.e("patching", e.message.toString())
             }
         }
     }

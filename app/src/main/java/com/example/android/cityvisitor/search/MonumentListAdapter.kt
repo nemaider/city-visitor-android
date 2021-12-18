@@ -9,7 +9,7 @@ import com.example.android.cityvisitor.search.MonumentListAdapter.MonumentListVi
 import com.example.android.cityvisitor.databinding.ListItemBinding
 import com.example.android.cityvisitor.network.Monuments
 
-class MonumentListAdapter(val clickListener: MonumentClickListener): ListAdapter<Monuments, MonumentListViewHolder>(DiffCallback){
+class MonumentListAdapter(val clickListener: MonumentClickListener, val favouriteClickListener: FavouriteMonumentClickListener): ListAdapter<Monuments, MonumentListViewHolder>(DiffCallback){
     companion object DiffCallback : DiffUtil.ItemCallback<Monuments>() {
         override fun areItemsTheSame(oldItem: Monuments, newItem: Monuments): Boolean {
             return oldItem === newItem
@@ -22,9 +22,11 @@ class MonumentListAdapter(val clickListener: MonumentClickListener): ListAdapter
 
     class MonumentListViewHolder(private var binding: ListItemBinding):
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(listener: MonumentClickListener, monument: Monuments) {
+        fun bind(listener: MonumentClickListener, monument: Monuments, favouriteClickListener: FavouriteMonumentClickListener) {
             binding.monument = monument
             binding.clickListener = listener
+            binding.favClickListener = favouriteClickListener
+
             // This is important, because it forces the data binding to execute immediately,
             // which allows the RecyclerView to make the correct view size measurements
             binding.executePendingBindings()
@@ -57,10 +59,15 @@ class MonumentListAdapter(val clickListener: MonumentClickListener): ListAdapter
      * may have been set previously.
      */
     override fun onBindViewHolder(holder: MonumentListViewHolder, position: Int) {
-        holder.bind(clickListener, getItem(position))
+        holder.bind(clickListener, getItem(position), favouriteClickListener)
     }
 }
 
 class MonumentClickListener(val clickListener: (monument: Monuments) -> Unit) {
     fun onClick(monument: Monuments) = clickListener(monument)
+
+}
+
+class FavouriteMonumentClickListener(val clickFavouriteListener: (monument: Monuments) -> Unit ){
+    fun onClickFavourite(monument: Monuments) = clickFavouriteListener(monument)
 }
