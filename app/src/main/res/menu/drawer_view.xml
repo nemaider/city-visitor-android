@@ -3,4 +3,5 @@
 
     <item android:title="@string/monument_search" android:id="@+id/monument_search" />
     <item android:title="@string/monument_add" android:id="@+id/monument_apply"/>
+    <item android:title="@string/favourite_monuments" android:id="@+id/monument_fav"/>
 </menu>

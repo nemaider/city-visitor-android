@@ -12,12 +12,19 @@
               android:label="Home" tools:layout="@layout/home_fragment">
         <action android:id="@+id/action_homeFragment_to_monumentListFragment" app:destination="@id/monument_search"/>
         <action android:id="@+id/action_homeFragment_to_addMonumentFragment" app:destination="@id/monument_apply"/>
+        <action
+            android:id="@+id/action_home_to_favMonumentListFragment"
+            app:destination="@id/monument_fav" />
     </fragment>
     <fragment
         android:id="@+id/monument_apply"
         android:name="com.example.android.cityvisitor.add.AddMonumentFragment"
         android:label="@string/monument_add_label"
         tools:layout="@layout/add_monument_fragment" />
+    <fragment
+        android:id="@+id/monument_fav"
+        android:name="com.example.android.cityvisitor.favourites.FavMonumentListFragment"
+        android:label="@string/favourite_monuments" />
 
     <!--<fragment-->
             <!--android:id="@+id/gdgDetailFragment"-->

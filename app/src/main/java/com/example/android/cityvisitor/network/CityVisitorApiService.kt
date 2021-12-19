@@ -29,6 +29,12 @@ interface CityVisitorApiService {
     suspend fun addMonumentToFavourite(@Query("touristId") touristId: String,
                                @Query("monumentId") monumentId: String)
 
+    @PATCH("tourists/remove-from-favourite")
+    suspend fun removeMonumentFromFavourite(@Query("touristId") touristId: String,
+                                       @Query("monumentId") monumentId: String)
+
+
+
 
 }
 private val moshi = Moshi.Builder()

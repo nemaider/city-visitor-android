@@ -1,4 +1,4 @@
-package com.example.android.cityvisitor.search
+package com.example.android.cityvisitor.favourites
 
 import android.location.Location
 import android.util.Log
@@ -9,7 +9,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.withContext
 
-class MonumentsRepository(cityVisitorApiService: CityVisitorApiService) {
+class FavMonumentsRepository(cityVisitorApiService: CityVisitorApiService) {
 
 
     private val cityVisitorApi = cityVisitorApiService
@@ -20,28 +20,19 @@ class MonumentsRepository(cityVisitorApiService: CityVisitorApiService) {
      */
 
     private val tourist_id = "618bc30fae697254a946764f"
-
-    private val monuments = cityVisitorApi.getMonuments()
-
-    suspend fun addMonument(monuments: Monuments){
-
-        withContext(Dispatchers.IO) {
-            try {
-                CityVisitorApi.RETROFIT_SERVICE.addMonument(monuments)
-            } catch (e: Exception) {
-                Log.e("adding", e.message.toString())
-            }
-        }
-    }
+    private val monuments = cityVisitorApi.getFavouriteMonuments(tourist_id)
 
 
 
-    suspend fun addToFavourite(monument: Monuments){
+
+    // TODO suspend fun removeFromFav (((BELOW)))
+
+    suspend fun removeFromFav(monument: Monuments){
         withContext(Dispatchers.IO){
             try {
-                CityVisitorApi.RETROFIT_SERVICE.addMonumentToFavourite(tourist_id, monument._id)
+                CityVisitorApi.RETROFIT_SERVICE.removeMonumentFromFavourite(tourist_id, monument._id)
             } catch (e: Exception) {
-                Log.e("patching", e.message.toString())
+                Log.e("deleting", e.message.toString())
             }
         }
     }

@@ -3,22 +3,22 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/layout">
+        android:id="@+id/fav_layout">
     <data>
         <variable
                 name="monument"
                 type="com.example.android.cityvisitor.network.Monuments"/>
         <variable
                 name="clickListener"
-                type="com.example.android.cityvisitor.search.MonumentClickListener"/>
+                type="com.example.android.cityvisitor.favourites.FavMonumentClickListener"/>
 
         <variable
-            name="favClickListener"
-            type="com.example.android.cityvisitor.search.FavouriteMonumentClickListener"/>
+            name="unfavClickListener"
+            type="com.example.android.cityvisitor.favourites.UnfavouriteMonumentClickListener"/>
 
         <variable
             name="viewModel"
-            type="com.example.android.cityvisitor.search.MonumentListViewModel"/>
+            type="com.example.android.cityvisitor.favourites.FavMonumentListViewModel"/>
 
 
 
@@ -29,15 +29,16 @@
         android:layout_width="match_parent"
         android:layout_height="140dp"
         android:onClick="@{() -> clickListener.onClick(monument)}"
-        tools:context="com.example.android.cityvisitor.monumentlist.MonumentListFragment">
+        tools:context="com.example.android.cityvisitor.favMonumentList.FavMonumentListFragment">
 
         <ImageView
-            android:id="@+id/monument_image"
+            android:id="@+id/fav_monument_image"
             android:layout_width="50dp"
             android:layout_height="76dp"
             android:layout_marginStart="@dimen/spacing_normal"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="16dp"
+            android:contentDescription="TODO"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -45,7 +46,7 @@
             app:srcCompat="@drawable/ic_twotone_home_work_24" />
 
         <TextView
-            android:id="@+id/monument_name"
+            android:id="@+id/fav_monument_name"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="@dimen/spacing_normal"
@@ -53,17 +54,16 @@
             android:gravity="center_vertical"
             android:text="@{monument.name}"
             android:textAppearance="?textAppearanceHeadline6"
-            app:layout_constraintBottom_toTopOf="@+id/monument_info"
+            app:layout_constraintBottom_toTopOf="@+id/fav_monument_info"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/monument_image"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/fav_monument_image"
+            app:layout_constraintTop_toTopOf="@+id/fav_monument_image"
             app:layout_constraintVertical_chainStyle="packed"
             tools:text="Monument name" />
 
         <TextView
-            android:id="@+id/monument_info"
+            android:id="@+id/fav_monument_info"
             android:layout_width="313dp"
             android:layout_height="35dp"
             android:layout_marginStart="@dimen/spacing_normal"
@@ -71,16 +71,14 @@
             android:gravity="center_vertical"
             android:text="@{monument.info}"
             android:textAppearance="?textAppearanceSubtitle2"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/monument_name"
+            app:layout_constraintBottom_toTopOf="@+id/fav_monument_ratingBar"
+            app:layout_constraintEnd_toEndOf="@+id/fav_monument_name"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/monument_image"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.245"
+            app:layout_constraintStart_toEndOf="@+id/fav_monument_image"
             tools:text="information about monument" />
 
         <RatingBar
-            android:id="@+id/monument_ratingBar"
+            android:id="@+id/fav_monument_ratingBar"
             android:layout_width="243dp"
             android:layout_height="44dp"
             android:gravity="center_vertical"
@@ -88,21 +86,21 @@
             android:numStars="5"
             android:rating="@{monument.rate}"
             android:textAppearance="?textAppearanceHeadline6"
-            app:layout_constraintEnd_toEndOf="@+id/monument_info"
-            app:layout_constraintTop_toBottomOf="@+id/monument_info"
+            app:layout_constraintBottom_toBottomOf="@+id/fav_add_to_favourite"
+            app:layout_constraintEnd_toEndOf="@+id/fav_monument_info"
             tools:ignore="SpeakableTextPresentCheck" />
 
         <ImageView
-            android:id="@+id/add_to_favourite_button"
+            android:id="@+id/fav_add_to_favourite"
             android:layout_width="50dp"
             android:layout_height="37dp"
             android:layout_marginBottom="8dp"
-            android:onClick="@{() -> favClickListener.onClickFavourite(monument)}"
-            app:srcCompat="@drawable/twotone_favorite_24"
+            app:srcCompat="@drawable/twotone_delete_24"
+            android:onClick="@{() -> unfavClickListener.onClickUnfavourite(monument)}"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/monument_image"
-            app:layout_constraintStart_toStartOf="@+id/monument_image"
-            app:layout_constraintTop_toBottomOf="@+id/monument_image"
+            app:layout_constraintEnd_toEndOf="@+id/fav_monument_image"
+            app:layout_constraintStart_toStartOf="@+id/fav_monument_image"
+            app:layout_constraintTop_toBottomOf="@+id/fav_monument_image"
             app:layout_constraintVertical_bias="0.111" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
