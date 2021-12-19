@@ -41,7 +41,6 @@ class MonumentsRepository(cityVisitorApiService: CityVisitorApiService) {
     suspend fun addToFavourite(monument: Monuments){
         withContext(Dispatchers.IO){
             try {
-                Log.e("patching", "kurwo dzialaj")
                 CityVisitorApi.RETROFIT_SERVICE.addMonumentToFavourite(tourist_id, monument._id)
             } catch (e: Exception) {
                 Log.e("patching", e.message.toString())

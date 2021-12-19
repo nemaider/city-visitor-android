@@ -13,8 +13,11 @@
         <action android:id="@+id/action_homeFragment_to_monumentListFragment" app:destination="@id/monument_search"/>
         <action android:id="@+id/action_homeFragment_to_addMonumentFragment" app:destination="@id/monument_apply"/>
     </fragment>
-    <fragment android:id="@+id/monument_apply" android:name="com.example.android.cityvisitor.add.AddMonumentFragment"
-              android:label="Apply" tools:layout="@layout/add_monument_fragment"/>
+    <fragment
+        android:id="@+id/monument_apply"
+        android:name="com.example.android.cityvisitor.add.AddMonumentFragment"
+        android:label="@string/monument_add_label"
+        tools:layout="@layout/add_monument_fragment" />
 
     <!--<fragment-->
             <!--android:id="@+id/gdgDetailFragment"-->

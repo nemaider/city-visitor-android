@@ -36,8 +36,6 @@ class AddMonumentFragment : Fragment() {
                 ).show()
                 viewModel.doneShowingSnackbar()
 
-                binding.button.contentDescription=getString(R.string.submitted)
-                binding.button.text=getString(R.string.done)
                 binding.EditTextCategory.text.clear()
                 binding.EditTextInfo.text.clear()
                 binding.EditTextNameMonument.text.clear()

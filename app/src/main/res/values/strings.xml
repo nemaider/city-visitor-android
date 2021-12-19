@@ -37,4 +37,5 @@
     <string name="done">Done</string>
     <string name="submit">Submit</string>
     <string name="description_text">Rating:</string>
+    <string name="monument_add_label">Dodaj zabytek</string>
 </resources>
