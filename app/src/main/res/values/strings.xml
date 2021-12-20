@@ -21,6 +21,12 @@
     <string name="waiting_for_location_and_network">Oczekiwanie na informacje o lokalizacji i połączeniu internetowym\n\n
         Na wszelki wypadek uruchom lokalizacje z poziomu aplikacji google maps.
     </string>
+    <string name="waiting_for_gps_and_network_or_informations">
+        Oczekiwanie na informacje o lokalizacji i połączeniu internetowym\n
+        Na wszelki wypadek uruchom lokalizacje z poziomu aplikacji google maps.\n\n
+        W przeciwnym wypadku, Twoja lista ulubionych zabytków jest pusta.\n
+        Znajdź coś dla siebie :)
+    </string>
     <string name="stage_image_description">Photo from city</string>
     <string name="submit_button_description">Button to submit form</string>
     <string name="form_name_description">enter your name</string>

@@ -43,15 +43,13 @@ class MonumentListViewModel: ViewModel() {
         }
     }
 
-//    var monument = MutableLiveData<Monuments>()
-//
+
+
     fun addMonumentToFavourite(monument: Monuments){
         viewModelScope.launch {
             repository.addToFavourite(monument)
         }
     }
-
-
 
 
 

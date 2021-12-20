@@ -17,11 +17,6 @@ fun bindRecyclerView(recyclerView: RecyclerView, data: List<Monuments>?) {
         // scroll the list to the top after the diffs are calculated and posted
         recyclerView.scrollToPosition(0)
     }
-
-/*    val favAdapter = recyclerView.adapter as FavMonumentListAdapter
-    favAdapter.submitList(data){
-        recyclerView.scrollToPosition(0)
-    }*/
 }
 
 @BindingAdapter("favListData")

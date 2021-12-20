@@ -19,13 +19,9 @@ class FavMonumentsRepository(cityVisitorApiService: CityVisitorApiService) {
      * and the result will be cached in memory.
      */
 
-    private val tourist_id = "618bc30fae697254a946764f"
+    private val tourist_id = "61bfc182b99292597485da13"
     private val monuments = cityVisitorApi.getFavouriteMonuments(tourist_id)
 
-
-
-
-    // TODO suspend fun removeFromFav (((BELOW)))
 
     suspend fun removeFromFav(monument: Monuments){
         withContext(Dispatchers.IO){
@@ -181,7 +177,7 @@ class FavMonumentsRepository(cityVisitorApiService: CityVisitorApiService) {
 
 
             /**
-             * Sort a list of GdgChapter by their distance from the specified location.
+             * Sort a list of monuments by their distance from the specified location.
              *
              * @param currentLocation returned list will be sorted by the distance, or unsorted if null
              */

@@ -57,7 +57,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:text="@string/waiting_for_location_and_network"
+                android:text="@string/waiting_for_gps_and_network_or_informations"
                 android:gravity="center"
                 android:textStyle="bold"
                 app:showOnlyWhenEmpty="@{viewModel.monumentList}"

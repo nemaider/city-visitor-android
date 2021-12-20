@@ -9,7 +9,6 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.*
 
 
-//private const val BASE_URL = "https://android-kotlin-fun-mars-server.appspot.com/"
 private const val BASE_URL = "http://192.168.0.43:8080/api/v1/"
 interface CityVisitorApiService {
     @GET("monuments/all-data")

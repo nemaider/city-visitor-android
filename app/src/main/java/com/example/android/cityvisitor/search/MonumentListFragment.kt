@@ -46,7 +46,7 @@ class MonumentListFragment : Fragment() {
             viewModel.addMonumentToFavourite(monument)
             Snackbar.make(
                 binding.root,
-                "Dodano do ulubionych "+monument.name,
+                "Wysłano do listy ulubionych "+monument.name,
                 Snackbar.LENGTH_LONG
             ).show()
         })

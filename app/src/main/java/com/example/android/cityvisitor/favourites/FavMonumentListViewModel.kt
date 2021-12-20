@@ -43,24 +43,12 @@ class FavMonumentListViewModel: ViewModel() {
         }
     }
 
-//    var monument = MutableLiveData<Monuments>()
-//
-//    fun addMonumentToFavourite(monument: Monuments){
-//        viewModelScope.launch {
-//            repository.addToFavourite(monument)
-//        }
-//    }
-
-    // TODO fun removeMonFromFav ^
 
     fun removeMonumentFromFavourite(monument: Monuments){
         viewModelScope.launch {
             repository.removeFromFav(monument)
         }
     }
-
-
-
 
 
     private fun onQueryChanged() {
